@@ -8,6 +8,7 @@ Very friendly yet rigorous material. I'm using it as a primer to more difficult 
 
 ### Suggested path to OCaml land by ... me!
 
+|level| material|
 |---|----|
 |1| This gitbook|
 |2| OCaml 99 problems|
