@@ -21,3 +21,5 @@ let rec foldtree init op = function
 
 (** implement tree functions using foldtree *)
 let size t = foldtree 0 (fun _ l r -> 1 + l + r) t
+let depth t = foldtree 0 (fun _ l r -> 1 + max l r) t
+let preorder t = foldtree [] (fun x l r -> [x] @ l @ r) t
