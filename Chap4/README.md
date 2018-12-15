@@ -10,4 +10,3 @@ $ ./<filename>.byte
 |11 list manipulation using three different methods: recursive pattern matching, fold, library | 
 |12 fold trees|
 |13 pipelining operator -- very idiomatic | 
-|
