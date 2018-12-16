@@ -38,3 +38,4 @@ let () =
     print_endline (Ints.(to_string (one + one)));
     print_endline (Ints.to_string (make_num 3));
     print_endline (Ints.to_string (make_num 10));
+    print_endline (Ints.to_string (make_num 6665));
