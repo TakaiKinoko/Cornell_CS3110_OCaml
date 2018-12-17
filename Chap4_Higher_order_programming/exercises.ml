@@ -129,7 +129,58 @@ let budget = 1000
 let () = 
     print_endline(string_of_int (budget_foldl expenses budget));
     print_endline(string_of_int (budget_foldr expenses budget));
-    print_endline(string_of_int (budget_rec expenses budget));
+    print_endline(string_of_int (budget_rec expenses budget))
 
 
 (** 11. library uncurried *)
+let uncurried_nth (lst, n) = List.nth lst n
+
+let uncurried_append (l1, l2) = List.append l1 l2
+
+let uncurried_compare (a, b) = Char.compare a b
+
+let uncurried_max (a, b) = Pervasives.max
+
+(** 12. uncurry Write a function uncurry that takes in a curried function and returns the uncurried version of that function.*)
+
+let uncurry f = (fun (x, y) -> f x y)
+(**val uncurry : ('a -> 'b -> 'c) -> 'a * 'b -> 'c *)
+
+(** 13. curry *)
+(** val curry : ('a * 'b -> 'c) -> 'a -> 'b -> 'c *)
+let curry f = (fun x y -> f (x,y))
+
+(** testing *)
+let l1 = [1;2;3]
+let l2 = [4;5;6]
+
+let () = 
+    assert (curry (uncurry List.append) l1 l2 = List.append l1 l2)
+
+
+(** 14. terse product *)
+let terse_product_foldleft = List.fold_left ( *. ) 1.0
+
+let terse_product_foldright = ListLabels.fold_right ~f: ( *. ) ~init: 1.0
+
+let () = 
+    assert (terse_product_foldleft floats = 3000.);
+    assert (terse_product_foldleft floats = terse_product_foldright floats)
+
+
+(** 15. map composition.  Show how to replace any expression of 
+    the form List.map f (List.map g lst) 
+    with an equivalent expression that calls List.map only once.*)
+let map_composed (f: 'a -> 'b) (g: 'a -> 'b) (lst: 'a list) : 'b list =  List.map (fun elem -> f (g elem)) lst 
+
+(** test *)
+let l = [1;2;3;4;5]
+
+let f = (fun x -> x + 1)
+let g = (fun x -> x * 10)
+
+let () =
+    assert (List.map f (List.map g l) = (map_composed f g) l)
+
+
+(** 16. more list fun *)
