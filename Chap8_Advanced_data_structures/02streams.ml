@@ -51,3 +51,22 @@ let rec square (Cons (h, tf)) =
 let rec sum (Cons (h1, tf1)) (Cons (h2, tf2)) = 
     Cons(h1 + h2, fun () -> sum (tf1 ()) (tf2()))
 
+(* [map f <a;b;c;...>] is [<f a; f b; f c; ...>] *)
+let rec map f (Cons (hd, tf)) =
+    Cons (f hd, fun () -> map f (tf ()))
+
+(* [map2 f <a1;b1;c1;...> <a2;b2;c2;...>] is
+ * [<f a1 b1; f a2 b2; f a3 b3; ...>] *)
+let rec map2 f (Cons (h1, tf1)) (Cons (h2, tf2)) = 
+    Cons(f h1 h2, fun () -> map2 f (tf1 ()) (tf2 ()))
+
+(** redifine square and sum *)
+let squre' = map (fun n -> n*n)
+let sum' = map2 (+)
+
+(** redefine nats *)
+let rec nats = Cons(0, fun () -> map (fun x -> x + 1) nats)
+
+let () = 
+    List.iter (fun x -> print_int x; print_string " ") (take 10 nats);
+    print_newline ()
