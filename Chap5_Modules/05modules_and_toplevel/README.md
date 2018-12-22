@@ -65,3 +65,27 @@ manually load dependencies into toplevel
 ```
 # #load_rec "mods2.cmo"
 ```
+
+### load vs use
+There is a big difference between #load-ing a compiled module file and #use-ing an uncompiled source file. The former loads bytecode and makes it available for use. For example, loading mods.cmo caused the Mod module to be available, and we could access its members with expressions like Mod.b. The latter (#use) is textual inclusion: it's like typing the contents of the file directly into the toplevel. So using mods.ml does not cause a Mod module to be available, and the definitions in the file can be accessed directly, e.g., b.
+```
+# #use "mods.ml"
+
+# b;;
+val b : string = "bigred"
+
+# Mods.b;;
+Error: Unbound module Mods
+```
+```
+# #directory "_build";;
+# #load "mods.cmo";;
+
+# Mods.b;;
+- : string = "bigred"
+
+# b;;
+Error: Unbound value b
+```
+
+So when you're using the toplevel to experiment with your code, it's often better to work with #load, because this accurately reflects how your modules interact with each other and with the outside world, rather than #use them.
