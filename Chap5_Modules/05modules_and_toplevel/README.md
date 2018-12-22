@@ -62,4 +62,6 @@ manually load dependencies into toplevel
 # #load "mods2.cmo";;
 ```
 * solution 2, better: 
+```
 # #load_rec "mods2.cmo"
+```
