@@ -16,5 +16,16 @@ module Lazy:
 
 * to demand evaluation: **Lazy.force** which takes a **'a Lazy.t** and causes a **'a** inside it finally be produced. 
 
-* The first time a lazy value is forced, the computation might take a long time. But the result is cached aka memoized, and any subsequent time that lazy value is forced, the memoized result will be returned immediately.
+* The first time a lazy value is forced, the computation might take a long time. But the result is cached aka **memoized**, and any subsequent time that lazy value is forced, the memoized result will be returned immediately.
 
+
+### use Lazy module
+The Lazy module doesn't contain a function that produces a 'a Lazy.t. Instead, there is a keyword built-in to the OCaml syntax that does it: lazy e.
+
+* syntax: 
+```
+lazy e
+```
+* static semantics: if e:u then lazy e: u Lazy.t
+
+* dynamic semantics: lazy e does not evaluate e to a value. Instead it produced a delayed value aka lazy value that, when later forced, will evaluate e to a value v and return v. Moreover, that delayed value remembers that v is its forced value. And if the delayed value is ever forced again, it immediately returns v instead of recomputing it.
