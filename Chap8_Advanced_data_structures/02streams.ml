@@ -70,3 +70,4 @@ let rec nats = Cons(0, fun () -> map (fun x -> x + 1) nats)
 let () = 
     List.iter (fun x -> print_int x; print_string " ") (take 10 nats);
     print_newline ()
+
