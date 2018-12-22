@@ -37,4 +37,11 @@ lazy e does not evaluate e to a value. Instead it produced a delayed value aka l
 ```
 let fib30long = take 30 fibs |> List.rev |> List.hd
 ```
-
+then the first time an evaluation is forced, it takes long: 
+```
+let fib30 = Lazy.force fib30lazy
+```
+But if we try to recompute the same lazy value, it will return immediately
+```
+let fib30fast = Lazy.force fib30lazy
+```
