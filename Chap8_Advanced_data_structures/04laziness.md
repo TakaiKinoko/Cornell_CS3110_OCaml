@@ -16,5 +16,5 @@ module Lazy:
 
 * to demand evaluation: **Lazy.force** which takes a **'a Lazy.t** and causes a **'a** inside it finally be produced. 
 
-
+* The first time a lazy value is forced, the computation might take a long time. But the result is cached aka memoized, and any subsequent time that lazy value is forced, the memoized result will be returned immediately.
 
