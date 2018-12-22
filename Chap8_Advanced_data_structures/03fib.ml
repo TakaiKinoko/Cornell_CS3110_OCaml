@@ -21,3 +21,11 @@ let rec fibs =
 let () = 
     List.iter (fun x -> print_int x; print_string " ") (take 10 fibs);
     print_newline()
+
+
+(** using Lazy *)
+let fib30lazy = lazy (take 30 fibs |> List.rev |> List.hd)
+let fib30 = Lazy.force fib30lazy
+let fib30fast = Lazy.force fib30lazy
+let () = print_endline(string_of_int fib30) (**would take a long time*)
+let () = print_endline(string_of_int fib30fast) (**instant result, cuz it's memoised *)

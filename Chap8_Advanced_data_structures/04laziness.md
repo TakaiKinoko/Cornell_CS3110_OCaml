@@ -31,3 +31,8 @@ if e:u then lazy e: u Lazy.t
 
 * dynamic semantics: 
 lazy e does not evaluate e to a value. Instead it produced a delayed value aka lazy value that, when later forced, will evaluate e to a value v and return v. Moreover, that delayed value remembers that v is its forced value. And if the delayed value is ever forced again, it immediately returns v instead of recomputing it.
+
+### lazy fib
+let fib30long = take 30 fibs |> List.rev |> List.hd
+let () = print_endline(string_of_int fib30long)
+
