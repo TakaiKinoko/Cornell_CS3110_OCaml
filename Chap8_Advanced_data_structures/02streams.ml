@@ -41,3 +41,13 @@ let rec drop n s =
 let () = 
     List.iter (fun x -> print_int x; print_string " ") (take 100 nats);
     print_newline ()
+
+(* [square <a;b;c;...>] is [<a*a;b*b;c*c;...]. *)
+let rec square (Cons (h, tf)) =
+  Cons (h*h, fun () -> square (tf ()))
+
+(* [sum <a1;b1;c1;...> <a2;b2;c2;...>] is
+ * [<a1+b1;a2+b2;a3+b3;...>] *)
+let rec sum (Cons (h1, tf1)) (Cons (h2, tf2)) = 
+    Cons(h1 + h2, fun () -> sum (tf1 ()) (tf2()))
+
