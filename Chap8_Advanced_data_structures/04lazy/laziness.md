@@ -45,3 +45,16 @@ But if we try to recompute the same lazy value, it will return immediately
 ```
 let fib30fast = Lazy.force fib30lazy
 ```
+
+### problem, still
+That particular computation of the 30th Fibonacci number has been memoized, but if we later define some other computation of another it won't be sped up the first time it's computed:
+```
+(* slow, even if [fib30lazy] was already forced *)
+let fib29 = take 29 fibs |> List.rev |> List.hd
+```
+
+### solution : lazy streams
+load "lazy_stream.ml" 's .cmo into toplevel and compare two modules
+
+## Lazy vs. Eager
+* OCaml's usual evaluation strategy is eager aka strict: it always evaluate an argument before function application. If you want a value to be computed lazily, you must specifically request that with the lazy keyword. Other function languages, notably Haskell, are lazy by default. Laziness can be pleasant when programming with infinite data structures. But lazy evaluation makes it harder to reason about space and time, and it has bad interactions with side effects. That's one reason we use OCaml rather than Haskell in this course.

@@ -184,3 +184,92 @@ let () =
 
 
 (** 16. more list fun *)
+let longer_length = List.filter (fun x -> if String.length x > 3 then true else false) 
+
+let add_1 = List.map (fun x -> x +. 1.) 
+
+let combine_str strs sep = List.fold_left (fun accum x -> if accum = "" then x else accum ^ sep ^ x) "" strs
+
+(** tests*)
+let tl = ["I"; "can't"; "believe"; "OS"; "finals"; "was"; "that"; "hard"]
+let () = 
+    print_endline(combine_str tl "!");
+    print_endline(combine_str (longer_length tl) " ")
+
+
+(** 17. tree map *)
+type 'a tree = 
+    | Leaf 
+    | Node of 'a * 'a tree * 'a tree
+
+(** Write a function tree_map : ('a -> 'b) -> 'a tree -> 'b tree that applies a function to every node of a tree, 
+    just like List.map applies a function to every element of a list.*)
+let rec tree_map f t = 
+    match t with 
+    | Leaf -> Leaf
+    | Node (x, left, right) -> Node (f x, tree_map f left, tree_map f right)
+
+let add1 = tree_map (fun x -> x + 1)
+
+(** tests *)
+(** print out the tree in order*)
+let rec print_tree tree = 
+    match tree with 
+    | Leaf -> print_string ""
+    | Node(x, left, right) -> 
+        print_tree left; 
+        print_endline(string_of_int x);
+        print_tree right
+
+let test_tree = Node( 4, Node (2, Node(1, Leaf, Leaf), Node(3, Leaf, Leaf)), Node(5, Leaf, Leaf))
+(**     4   
+      2   5
+    1  3     *)
+
+let () = print_tree test_tree; print_tree (add1 test_tree)
+
+
+(** 18. association list keys *)
+let keys1 lst = List.fold_right (fun (k, _) init -> if List.mem k init then init else k::init) lst []
+let keys2 lst = List.sort_uniq String.compare (List.map fst lst)
+let keys3 lst = List.fold_left (fun accum (k, _) -> if List.mem k accum then accum else k::accum) [] lst (** tail recursive, so sublinear stack space*)
+
+(** merge sort *)
+let rec split (l : 'a list) : 'a list * 'a list =
+  match l with
+    [] -> ([] , [])
+  | [x] -> ([x] , [])
+  | x :: y :: xs -> 
+      let (pile1, pile2) = split xs in 
+      (x :: pile1, y :: pile2)
+
+let rec merge_no_dup (comp : 'a -> 'a -> int ) (l1 : 'a list) (l2 : 'a list) : 'a list =
+  match (l1, l2) with
+    ([] , l2) -> l2
+  | (l1 , []) -> l1
+  | (x :: xs, y :: ys) ->
+     if comp x y < 0 then 
+        x :: merge_no_dup comp xs l2
+     else if comp x y > 0 then 
+        y :: merge_no_dup comp l1 ys
+     else merge_no_dup comp xs l2
+
+let keys4 lst = 
+    let listpair = split (List.map fst lst) in 
+    let l1 = fst listpair in
+    let l2 = snd listpair in
+    merge_no_dup String.compare l1 l2 
+
+(** tests *)
+let assoc_l = [("OCaml", 1); ("Scala", 2); ("Scheme", 3); ("OCaml", 4)]
+let print_str_list = List.iter print_endline
+
+let () = 
+    print_endline("testing implementation 1: ");
+    print_str_list (keys1 assoc_l);
+    print_endline("testing implementation 2: ");
+    print_str_list (keys2 assoc_l);
+    print_endline("testing implementation 3: ");
+    print_str_list (keys3 assoc_l);
+    print_endline("testing implementation 4: ");
+    print_str_list (keys4 assoc_l);
