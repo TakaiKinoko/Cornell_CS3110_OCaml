@@ -14,9 +14,10 @@ module ListSetDups : Set = struct
     let elts s = List.sort_uniq Pervasives.compare s
 end
 
-module ListSetDupsExtended = struct 
-    include ListSetDups
-    let of_lst lst = List.fold_right add lst empty
-    let rec elts = function
-        | [] -> []
-        | h::t -> if mem h t then elts' t else h::(elts' t)
+module ListSetDupsExtended = struct
+  include ListSetDups
+  let of_list lst = List.fold_right add lst empty
+  let rec elts = function
+    | [] -> []
+    | h::t -> if mem h t then elts' t else h::(elts' t)
+end
