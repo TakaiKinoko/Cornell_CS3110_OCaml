@@ -19,3 +19,5 @@ let rec insert x t =
         if x = i then t
         else if x < i then Node(i, insert x l, r)
         else Node(i, l, insert x r)
+
+        
