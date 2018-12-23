@@ -6,7 +6,7 @@ OCaml is stratified: structures are distinct from values, so functions from stru
 ### why functors?
 In category theory, a category contains morphisms, which are a generalization of functions as we known them, and a functor is map between categories. Likewise, OCaml structures contain functions, and OCaml functors map from structures to structures.
 
-### what functors have to return something similar?
+### do functors have to return something similar?
 
 No. In fact, a functor can return any structure it likes, perhaps something very different than its input structure
 
