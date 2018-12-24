@@ -16,3 +16,4 @@ let () =
 
 (** NOTE that an IntMap is a map that has Int as its keys, values on the other hand can be other types 
     Although in general the map could have any value type, once we add a single value to a map, that "pins down" the value type of THAT PARTICULAR map*)
+  
