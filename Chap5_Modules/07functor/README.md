@@ -89,3 +89,25 @@ functor (M: Si) -> So
 module F : functor (M : Si) -> So = 
   functor (M : Si) -> struct ... end
 ```
+
+###Ocaml stdlib Map module
+* The input to Make is OrderedType who must support a compare operation.
+  Arguably this specification of 
+  ```
+  val compare: t-> t -> int
+  ```
+  is a missed opportunity for good design: the library designers could instead have defined a variant:
+  ```
+  type order = LT | EQ | GT
+  ```
+  the output type of compare should be order. 
+
+* The Map module actually specifies a sharing constraint: type key =    Ord.t. That is, the output of Map.Make shares its key type with the type Ord.t. That enables keys to be compared with Ord.compare. The way that sharing constraint is specified is in the type of Make (which can be found in map.mli, the interface file for the map compilation unit):
+  ```
+  module Make : functor (Ord : OrderedType) -> (S with type key = Ord.t)
+  ```
+
+* **VARIANCE** The Map module actually specifies a variance on the representation type, writing +'a t instead of 'a t as we did above.
+
+
+
