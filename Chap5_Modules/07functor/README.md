@@ -90,7 +90,7 @@ module F : functor (M : Si) -> So =
   functor (M : Si) -> struct ... end
 ```
 
-###Ocaml stdlib Map module
+### Ocaml stdlib Map module
 * The input to Make is OrderedType who must support a compare operation.
   Arguably this specification of 
   ```
