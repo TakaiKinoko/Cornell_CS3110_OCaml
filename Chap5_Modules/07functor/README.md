@@ -109,5 +109,6 @@ module F : functor (M : Si) -> So =
 
 * **VARIANCE** The Map module actually specifies a variance on the representation type, writing +'a t instead of 'a t as we did above.
 
-
-
+### OCaml Manual
+https://caml.inria.fr/pub/docs/manual-ocaml/libref/Map.html
+https://caml.inria.fr/pub/docs/manual-ocaml/libref/Map.Make.html
