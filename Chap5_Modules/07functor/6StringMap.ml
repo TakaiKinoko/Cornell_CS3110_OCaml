@@ -1,7 +1,7 @@
 (** If a module already provides a type t that can be compared, we can immediately use that module as an argument to Map.Make *)
 
 module StringMap = Map.Make(String)
-
+   
 open StringMap 
 
 let dict = add "s" "strawberry" (add "f" "fran" (add "e" "egg" (add "c" "cranberry" (add "b" "banana" (add "a" "apple" empty)))))
@@ -21,3 +21,4 @@ let () =
     print_string_dict(bindings new_dict);
     print_endline("new map cardinality: " ^string_of_int (cardinal new_dict));
     print_endline("old map cardinality: " ^string_of_int (cardinal dict))
+    
