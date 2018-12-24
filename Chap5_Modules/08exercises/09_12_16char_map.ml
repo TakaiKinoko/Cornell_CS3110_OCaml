@@ -41,3 +41,12 @@ let () =
     assert (b1 = b2);
     assert (b2 = b3);
     assert (b2 = b3)
+
+
+(** 16.  is for
+Write a function is_for : string CharMap.t -> string CharMap.t *)
+let is_for = mapi (fun ky v -> String.make 1 ky^" is for "^v)
+let updated_map = is_for map
+
+let () = 
+    print_assoc_list (bindings updated_map)
