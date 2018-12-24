@@ -112,3 +112,8 @@ module F : functor (M : Si) -> So =
 ### OCaml Manual
 https://caml.inria.fr/pub/docs/manual-ocaml/libref/Map.html
 https://caml.inria.fr/pub/docs/manual-ocaml/libref/Map.Make.html
+
+### Java analogy
+* The problem Map need to solve: balanced binary search trees require a way to compare keys, but the implementor can't know in advance all the different types of keys that a client of the data structure will want to use.
+* Solution: parameterize Map on a structure that bundles together the type of keys with a function that can be used to compare them. It's the client's responsibility to implement that structure. Given it, all the code in Map can be re-used by the client.
+* same idea is behind Java's TreeMap
