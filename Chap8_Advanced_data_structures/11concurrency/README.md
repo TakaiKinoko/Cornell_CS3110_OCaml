@@ -19,4 +19,4 @@
 * adoption in other languages: 
     * JS's *async* keyword -- causes a function to return a promise 
     *await* keyword -- waits for a promise to finish computing
-* OCaml: **Async** and **Lwt**
+* OCaml: **Async** and **Lwt** (light weight thread)
