@@ -44,4 +44,18 @@ meaning: they reveal certain information about the behavior of a module without 
     ```
         * pro: free to design an algorithm without the constraint of having to check for invalid input parameters
         * con: difficult to debug if the function is called improperly
-    * **Raises Clause**
+    * **Raises Clause** : Another way to deal with partial functions is to convert them into total functions. 
+        * pro: arguably easier for the client to deal with because the function's behavior is always defined
+        * con: it pushes work onto the implementer and may lead to a slower implementation.
+        * how? 
+        ```
+        (** [sqr x] is the square root of [x], with relative accuracy no worse than 1.0x10^-6. Raises: [Negative] if [x < 0]. *)
+        ```
+        Note that the implementation of this sqr function must check whether x >= 0, even in the production version of the code, because some client may be relying on the exception to be raised.
+
+* **Examples Clause** It can be useful to provide an illustrative example as part of a specification. 
+    ```
+    (** [find lst x] is the index of [x] in [lst], starting from zero.
+    Example: [find ["b","a","c"] "a" = 1]. *)
+    ```
+
