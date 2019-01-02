@@ -2,7 +2,7 @@
 * It is usually better to write a **paragraph-style comment** at the beginning of the function explaining how its implementation works
 * Explicit points in the code that need to be related to that paragraph can then be marked with very brief comments, like **(* case 1 *)**.
 
-### BAD example: verbose descriptive name
+### BAD function name: verbose, descriptive 
 * 
     ```
     let number_of_zeros_in_the_list =
@@ -12,7 +12,7 @@
     ```
 * fix: use a short and suggestive name (e.g., zeroes), and if necessary, add a comment at its declaration explaining the purpose of the variable.
 
-### BAD practive: 
+### BAD variable name: 
  * encode the type of the variable in its name, e.g. naming a variable count a name like 
     ```
     i_count 
